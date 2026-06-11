@@ -1,0 +1,81 @@
+{
+  "_comment": "Copy this file to settings.json and fill in your values",
+  "telegram_accounts": [
+    {
+      "name": "main_account",
+      "api_id": "12345678",
+      "api_hash": "abcdef1234567890abcdef1234567890",
+      "phone": "+1234567890",
+      "session_name": "main_account_session",
+      "enabled": true
+    },
+    {
+      "name": "secondary_account",
+      "api_id": "87654321",
+      "api_hash": "fedcba0987654321fedcba0987654321",
+      "phone": "+9876543210",
+      "session_name": "secondary_account_session",
+      "enabled": false
+    }
+  ],
+  "notification_bot": {
+    "bot_token": "1234567890:ABCDefghijklmnop-qrstuvwxyz01234567",
+    "chat_id": "-1001234567890",
+    "enabled": true
+  },
+  "database": {
+    "type": "sqlite",
+    "sqlite_path": "data/gifts.db",
+    "postgres_url": "postgresql://user:password@localhost:5432/gifts_db"
+  },
+  "monitoring": {
+    "scan_interval_seconds": 5,
+    "market_refresh_interval_seconds": 30,
+    "max_concurrent_requests": 10,
+    "gift_types": ["collectible", "nft"],
+    "track_collections": []
+  },
+  "trading": {
+    "enabled": false,
+    "_comment_enabled": "Set to true to enable auto-buying. Test with dry-run first!",
+    "underpriced_threshold_percent": 20,
+    "max_daily_spend_ton": 100.0,
+    "max_daily_purchases": 20,
+    "max_single_purchase_ton": 10.0,
+    "min_floor_price_ton": 0.1,
+    "max_floor_price_ton": 1000.0,
+    "duplicate_protection_hours": 24,
+    "require_min_sales_count": 3,
+    "strategy": "underpriced",
+    "slippage_tolerance_percent": 2.0,
+    "auto_confirm": false,
+    "_comment_auto_confirm": "Set to true ONLY after testing with dry-run. This will spend real TON!"
+  },
+  "analysis": {
+    "floor_price_window_sales": 10,
+    "historical_avg_window_days": 7,
+    "rarity_weight": 0.3,
+    "price_weight": 0.5,
+    "volume_weight": 0.2
+  },
+  "backtesting": {
+    "start_date": "2024-01-01",
+    "end_date": "2024-12-31",
+    "initial_capital_ton": 1000.0,
+    "commission_percent": 0.5,
+    "simulate_slippage": true
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/system.log",
+    "max_file_size_mb": 100,
+    "backup_count": 5,
+    "console_output": true
+  },
+  "api": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "enabled": true,
+    "secret_key": "your-secret-api-key-here"
+  }
+}
