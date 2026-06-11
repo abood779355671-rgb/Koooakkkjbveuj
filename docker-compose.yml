@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  gift-monitor:
+    build: .
+    container_name: gift-monitor
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./sessions:/app/sessions
+      - ./settings.json:/app/settings.json
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python main.py start
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: gift-monitor-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gifts_db
+      POSTGRES_USER: gifts_user
+      POSTGRES_PASSWORD: gifts_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
